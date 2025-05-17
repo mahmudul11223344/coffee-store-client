@@ -19,7 +19,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
             if (result.isConfirmed) {
 
                 // start back-end deleting 
-                fetch(`http://localhost:3000/coffees/${_id}`, {
+                fetch(`https://coffee-store-server-indol-one.vercel.app/coffees/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

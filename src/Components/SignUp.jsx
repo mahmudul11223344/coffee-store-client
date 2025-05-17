@@ -27,7 +27,7 @@ const SignUp = () => {
                 }
 
                 // save in database
-                fetch('http://localhost:3000/users', {
+                fetch('https://coffee-store-server-indol-one.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

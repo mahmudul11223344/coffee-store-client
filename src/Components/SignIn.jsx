@@ -1,9 +1,42 @@
-import React from 'react';
+import React, { use } from 'react';
+import { AuthContext } from '../Context/AuthContext';
 
 const SignIn = () => {
 
+    const signInUser = use(AuthContext);
+
     const handleSignIn = e => {
         e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        signInUser(email, password)
+        .then(result => {
+            console.log(result.user);
+            const signInInfo = {
+                email,
+                lastSignInTime: result.user?.metadata?.lastSignInTime
+            }
+
+            fetch('https://coffee-store-server-indol-one.vercel.app/users', {
+                method: 'PATCH',
+                headers:{
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(signInInfo)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
     }
 
     return (
